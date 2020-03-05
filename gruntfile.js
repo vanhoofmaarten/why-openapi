@@ -28,6 +28,12 @@ module.exports = grunt => {
         cwd: `${revealJsModulePath}`,
         src: ["css/print/*.css", "css/reset.css", "lib/css/monokai.css"],
         dest: `${distPath}`
+      },
+      reveal: {
+        expand: true,
+        cwd: `${srcPath}/assets`,
+        src: ["**/*.*"],
+        dest: `${distPath}/assets`
       }
     },
 
@@ -83,13 +89,13 @@ module.exports = grunt => {
             dest: `${distPath}/index.html`
           }
         ],
-        partials: `${srcPath}/slides/*.hbs`
+        partials: [`${srcPath}/slides/*.hbs`, `${srcPath}/partials/*.hbs`]
       }
     },
 
     watch: {
       custom: {
-        files: [`${distPath}/css**/*.scss`],
+        files: [`${srcPath}/css/**/*.scss`],
         tasks: "css-custom"
       },
       html: {
@@ -115,7 +121,7 @@ module.exports = grunt => {
   grunt.registerTask("js", ["uglify"]);
 
   // Theme CSS
-  grunt.registerTask("css-themes", ["sass:themes"]);
+  grunt.registerTask("css-custom", ["sass:custom"]);
 
   // Core framework CSS
   grunt.registerTask("css-core", ["sass:core"]);

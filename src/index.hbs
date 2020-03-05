@@ -7,12 +7,12 @@
 
   <title>Why OpenAPI?!</title>
 
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/reveal.css" />
   <link rel="stylesheet" href="css/theme/mrtnvh.css" />
-
-  <!-- Theme used for syntax highlighting of code -->
-  <link rel="stylesheet" href="css/code/monokai.css" />
 
   <!-- Printing and PDF exports -->
   <script>
@@ -27,13 +27,16 @@
 </head>
 
 <body>
-  <div class="reveal">
-    <div class="slides">
-      {{> 1}}
-      {{> 2}}
-      {{> 3}}
+  {{> header}}
+  <main>
+    <div class="reveal">
+      <div class="slides">
+        {{> 1}}
+        {{> 2}}
+        {{> 3}}
+      </div>
     </div>
-  </div>
+  </main>
 
   <script src="js/reveal.min.js"></script>
 
@@ -42,11 +45,18 @@
     // - https://github.com/hakimel/reveal.js#configuration
     // - https://github.com/hakimel/reveal.js#dependencies
     Reveal.initialize({
+      width: "100%",
+      height: "100%",
+      margin: 0.125,
+      minScale: 1,
+      maxScale: 1,
       hash: true,
+      center: false,
+      display: 'flex',
       dependencies: [
-        { src: "plugin/markdown/marked.js" },
-        { src: "plugin/markdown/markdown.js" },
-        { src: "plugin/highlight/highlight.js" },
+        { src: "plugin/markdown/marked.js", async: true },
+        { src: "plugin/markdown/markdown.js", async: true },
+        { src: 'plugin/highlight/highlight.js', async: true },
         { src: "plugin/notes/notes.js", async: true }
       ]
     });
