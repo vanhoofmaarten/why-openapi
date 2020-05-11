@@ -53,6 +53,21 @@ $slidePadding: 3rem;
   font-weight: $mainFontWeight;
   font-size: 1rem;
 
+  a {
+    color: $mainColor;
+    text-decoration-skip-ink: auto;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+      color: $meta;
+
+      img {
+        box-shadow: none;
+      }
+    }
+  }
+
   .slides {
     section {
       text-align: left;
@@ -74,6 +89,23 @@ $slidePadding: 3rem;
   ol,
   dl {
     display: block;
+    list-style-type: none;
+    padding: 0;
+    margin-left: 0;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    li:before {
+      content: "–";
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  .list--unstyled li::before {
+    display: none;
   }
 
   pre {

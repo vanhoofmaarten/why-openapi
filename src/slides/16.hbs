@@ -1,0 +1,28 @@
+<section>
+  <div class="d-flex space-between flex-end">
+    <h2>Talking to the API</h2>
+    <p>Manually</p>
+  </div>
+  <pre><code data-trim class="hlhtml">
+&lt;script&gt;
+import redaxios from "redaxios";
+
+export default {
+  data() {
+    return {
+      todos: () => [],
+    }
+  },
+  async mounted() {
+    this.todos = await redaxios.get("https://jsonplaceholder.typicode.com/todos", {
+      params: {
+        limit: 10,
+        offset: 50,
+        priority: 'high',
+      }
+    }).then(({ data }) => data);
+  }
+}
+&lt;/script&gt;
+    </code></pre>
+</section>

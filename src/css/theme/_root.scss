@@ -20,10 +20,11 @@ body {
 a {
   color: $mainColor;
   text-decoration-skip-ink: auto;
+  text-decoration: underline;
 
   &:hover,
   &:focus {
-    color: $primary;
+    color: $meta;
   }
 }
 
@@ -50,4 +51,8 @@ img {
 
 .image-wrapper {
   position: relative;
+}
+
+svg {
+  fill: currentColor;
 }
