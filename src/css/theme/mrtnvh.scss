@@ -5,14 +5,14 @@
 
 // Colors used in the theme
 $primary: #95ff00;
-$white: #fff;
-$meta: #888;
+$white: #000;
+$meta: #555;
 
-$backgroundColor: $white;
+$backgroundColor: #111;
 
 // Main text
 $mainFont: "Inter", "system-ui", "sans-serif";
-$mainColor: #000;
+$mainColor: #eee;
 $mainFontWeight: 300;
 $mainFontSize: 2vw;
 
@@ -46,12 +46,16 @@ $slidePadding: 3rem;
 @import "spacing";
 @import "utilities";
 @import "header";
-@import "one-dark";
+// @import "one-dark";
 // ---------------------------------------------
 
 .reveal {
   font-weight: $mainFontWeight;
   font-size: 1rem;
+
+  section img {
+    background: transparent;
+  }
 
   a {
     color: $mainColor;

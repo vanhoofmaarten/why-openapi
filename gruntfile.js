@@ -1,6 +1,6 @@
 const sass = require("node-sass");
 
-module.exports = grunt => {
+module.exports = (grunt) => {
   require("load-grunt-tasks")(grunt);
 
   let port = grunt.option("port") || 8000;
@@ -10,6 +10,7 @@ module.exports = grunt => {
 
   const modulesPath = "node_modules";
   const revealJsModulePath = `${modulesPath}/reveal.js`;
+  const highlightJsModulePath = `${modulesPath}/highlight.js`;
   const distPath = `dist`;
   const srcPath = `src`;
 
@@ -19,54 +20,63 @@ module.exports = grunt => {
 
     clean: {
       dist: [distPath],
-      html: [`${distPath}/*.html`]
+      html: [`${distPath}/*.html`],
     },
 
     copy: {
       reveal: {
         expand: true,
         cwd: `${revealJsModulePath}`,
-        src: ["css/print/*.css", "css/reset.css", "lib/css/monokai.css"],
-        dest: `${distPath}`
+        src: ["css/print/*.css", "css/reset.css"],
+        dest: `${distPath}`,
       },
-      reveal: {
+
+      highlight: {
+        flatten: true,
+        expand: true,
+        cwd: `${highlightJsModulePath}`,
+        src: ["styles/atom-one-light.css"],
+        dest: `${distPath}/css`,
+      },
+
+      assets: {
         expand: true,
         cwd: `${srcPath}/assets`,
         src: ["**/*.*"],
-        dest: `${distPath}/assets`
-      }
+        dest: `${distPath}/assets`,
+      },
     },
 
     uglify: {
       build: {
         src: `${revealJsModulePath}/js/reveal.js`,
-        dest: `${distPath}/js/reveal.min.js`
+        dest: `${distPath}/js/reveal.min.js`,
       },
       plugins: {
         expand: true,
         cwd: `${revealJsModulePath}/plugin`,
         src: ["**/*.js"],
         dest: `${distPath}/plugin`,
-        ext: ".js"
-      }
+        ext: ".js",
+      },
     },
 
     sass: {
       options: {
         implementation: sass,
-        sourceMap: false
+        sourceMap: false,
       },
       core: {
         src: `${revealJsModulePath}/css/reveal.scss`,
-        dest: `${distPath}/css/reveal.css`
+        dest: `${distPath}/css/reveal.css`,
       },
       custom: {
         expand: true,
         cwd: `${srcPath}/css`,
         src: ["**/*.scss"],
         dest: `${distPath}/css`,
-        ext: ".css"
-      }
+        ext: ".css",
+      },
     },
 
     connect: {
@@ -76,9 +86,9 @@ module.exports = grunt => {
           base: distPath,
           livereload: true,
           open: true,
-          useAvailablePort: true
-        }
-      }
+          useAvailablePort: true,
+        },
+      },
     },
 
     "compile-handlebars": {
@@ -86,29 +96,29 @@ module.exports = grunt => {
         files: [
           {
             src: `${srcPath}/index.hbs`,
-            dest: `${distPath}/index.html`
-          }
+            dest: `${distPath}/index.html`,
+          },
         ],
-        partials: [`${srcPath}/slides/*.hbs`, `${srcPath}/partials/*.hbs`]
-      }
+        partials: [`${srcPath}/slides/*.hbs`, `${srcPath}/partials/*.hbs`],
+      },
     },
 
     watch: {
       custom: {
         files: [`${srcPath}/css/**/*.scss`],
-        tasks: "css-custom"
+        tasks: "css-custom",
       },
       html: {
         files: `${srcPath}/**/*.hbs`,
-        tasks: "html"
+        tasks: "html",
       },
       markdown: {
-        files: root.map(path => path + "/*.md")
+        files: root.map((path) => path + "/*.md"),
       },
       options: {
-        livereload: true
-      }
-    }
+        livereload: true,
+      },
+    },
   });
 
   // Default task
